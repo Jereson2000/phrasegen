@@ -5,9 +5,19 @@ fn main() {
         let user_action = ui::select_action();
 
         match user_action {
-            Actions::Quit => break,
-            Actions::Generate => ui::generate_passphrase(),
-            Actions::Settings => ui::select_settings(),
+            Ok(action) => {
+                let result = match action {
+                    Actions::Quit => break,
+                    Actions::Generate => ui::generate_passphrase(),
+                    Actions::Settings => ui::select_settings(),
+                };
+
+                match result {
+                    Err(error) => println!("{error}"),
+                    Ok(_) => {}
+                };
+            }
+            Err(error) => println!("{error}"),
         }
     }
 }
