@@ -1,6 +1,8 @@
-use phrasegen::{actions::Actions, ui};
+use phrasegen::{actions::Actions, settings::Settings, ui};
 
 fn main() {
+    let settings = Settings::new();
+
     loop {
         let user_action = ui::select_action();
 
@@ -8,8 +10,8 @@ fn main() {
             Ok(action) => {
                 let result = match action {
                     Actions::Quit => break,
-                    Actions::Generate => ui::generate_passphrase(),
-                    Actions::Settings => ui::select_settings(),
+                    Actions::Generate => ui::generate_passphrase(&settings),
+                    Actions::Settings => ui::change_settings(),
                 };
 
                 match result {

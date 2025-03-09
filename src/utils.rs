@@ -1,7 +1,7 @@
 use std::{fs::File, io::{BufRead, BufReader, Error}};
 
 // TODO: Replace String with the Path type.
-pub fn parse_wordlist(path: String) -> Result<Vec<String>, Error> {
+pub fn parse_wordlist(path: &String) -> Result<Vec<String>, Error> {
     let file = File::open(path)?;
     let reader = BufReader::new(file);
     let mut wordlist = Vec::<String>::new();
